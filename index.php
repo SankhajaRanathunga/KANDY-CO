@@ -26,69 +26,307 @@ try {
 } catch (Exception $ex) {}
 ?>
 
-<!-- Hero Banner Section -->
-<section class="hero-section">
-    <img src="<?= getImageUrl('assets/images/hero/kandy-hero-main.jpg', 'HERO MAIN') ?>" alt="KANDY CO. Modern Fashion" class="hero-bg-img">
-    <div class="hero-content">
-        <span class="hero-subtitle">NEW SEASON ARRIVALS</span>
-        <h1 class="hero-title">KANDY CO.</h1>
-        <p class="hero-tagline">DEFINE YOUR EVERYDAY.</p>
-        <div class="hero-actions">
-            <a href="shop.php?gender=Men" class="btn btn-primary">SHOP MEN</a>
-            <a href="shop.php?gender=Women" class="btn btn-outline" style="border-color: #FFF; color: #FFF;">SHOP WOMEN</a>
-        </div>
-    </div>
-</section>
+<!-- Discover Collection Hero & Catalog Section (Clean Minimal Luxury Light Aesthetic) -->
+<style>
+.discover-hero-section {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    padding: 88px 0 80px;
+    border-bottom: 1px solid var(--border-color);
+}
 
-<!-- Brand Philosophy Statement -->
-<section class="section-padding" style="background-color: var(--bg-alt); text-align: center;">
-    <div class="container-narrow">
-        <span class="section-subtitle">OUR PHILOSOPHY</span>
-        <h2 class="section-title" style="margin-top: 12px; font-size: 1.8rem; font-weight: 700;">ARCHITECTURAL SILHOUETTES & UNCOMPROMISING QUALITY</h2>
-        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; margin-top: 16px;">
-            KANDY CO. was created for those who value refined simplicity and heavyweight construction. 
-            Every garment is custom-milled from organic high-density cotton, built with structural dropped shoulders, 
-            and tailored to elevate your daily wardrobe seamlessly.
-        </p>
-    </div>
-</section>
+.discover-header {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 48px;
+}
 
-<!-- Category Cards Showcase Grid -->
-<section class="section-padding">
+.discover-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+}
+
+.discover-main-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+}
+
+.discover-statement {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto 32px;
+    font-weight: 400;
+}
+
+.discover-quick-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 52px;
+}
+
+.discover-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 26px;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+}
+
+.discover-action-btn:hover {
+    background-color: var(--text-primary);
+    color: var(--text-inverse);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.discover-action-btn.active-pill {
+    background-color: var(--text-primary);
+    color: var(--text-inverse);
+    border-color: var(--text-primary);
+}
+
+.discover-action-btn.active-pill:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.discover-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.collection-card-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 34px 28px 30px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    color: var(--text-primary);
+    text-decoration: none;
+    min-height: 220px;
+}
+
+.collection-card-item:hover {
+    background-color: var(--bg-main);
+    border-color: var(--text-primary);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+}
+
+.collection-card-top {
+    margin-bottom: 24px;
+}
+
+.collection-card-heading {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.collection-card-desc {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+.collection-card-bottom {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+}
+
+.collection-card-link-text {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.collection-card-item:hover .collection-card-link-text {
+    color: var(--text-primary);
+    transform: translateX(4px);
+}
+
+@media (max-width: 1100px) {
+    .discover-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .discover-hero-section {
+        padding: 56px 0 48px;
+    }
+    .discover-header {
+        margin-bottom: 32px;
+    }
+    .discover-statement {
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+    .discover-quick-actions {
+        margin-bottom: 32px;
+        gap: 8px;
+    }
+    .discover-action-btn {
+        padding: 11px 18px;
+        font-size: 0.72rem;
+        flex: 1 1 calc(50% - 8px);
+    }
+    .discover-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .collection-card-item {
+        min-height: auto;
+        padding: 26px 20px;
+    }
+}
+</style>
+
+<section class="discover-hero-section">
     <div class="container">
-        <div class="section-header">
-            <span class="section-subtitle">DISCOVER</span>
-            <h2 class="section-title">THE COLLECTIONS</h2>
+        <!-- Minimal Luxury Header -->
+        <div class="discover-header">
+            <span class="discover-eyebrow">CORE ARCHIVE &bull; PERMANENT COLLECTION</span>
+            <h1 class="discover-main-title">DISCOVER COLLECTION</h1>
+            <p class="discover-statement">
+                Refined simplicity, structural silhouettes, and uncompromising heavyweight construction.
+                Explore our curated range of minimalist apparel crafted for everyday elevation.
+            </p>
+            <!-- Clean Text-Based Action Buttons -->
+            <div class="discover-quick-actions">
+                <a href="shop.php?gender=Men" class="discover-action-btn active-pill">SHOP MEN</a>
+                <a href="shop.php?gender=Women" class="discover-action-btn">SHOP WOMEN</a>
+                <a href="shop.php?new=1" class="discover-action-btn">NEW ARRIVALS</a>
+                <a href="shop.php?sale=1" class="discover-action-btn" style="border-color: var(--sale-color); color: var(--sale-color);">SALE ARCHIVE</a>
+                <a href="shop.php" class="discover-action-btn">ALL PRODUCTS</a>
+            </div>
         </div>
-        <div class="grid grid-4">
-            <div class="category-card">
-                <img src="<?= getImageUrl('assets/images/categories/men/men-collection.jpg', 'MEN') ?>" alt="Men Collection" class="category-card-img">
-                <div class="category-card-content">
-                    <h3 class="category-card-title">MEN</h3>
-                    <a href="shop.php?gender=Men" class="category-card-link">EXPLORE COLLECTION &rarr;</a>
+
+        <!-- Clean Text-Based Collection Cards Grid -->
+        <div class="discover-grid">
+            <a href="shop.php?gender=Men" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">MEN</h2>
+                    <p class="collection-card-desc">Architectural dropped shoulders, heavyweight boxy tees, relaxed tailoring, and structured street essentials.</p>
                 </div>
-            </div>
-            <div class="category-card">
-                <img src="<?= getImageUrl('assets/images/categories/women/women-collection.jpg', 'WOMEN') ?>" alt="Women Collection" class="category-card-img">
-                <div class="category-card-content">
-                    <h3 class="category-card-title">WOMEN</h3>
-                    <a href="shop.php?gender=Women" class="category-card-link">EXPLORE COLLECTION &rarr;</a>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE MEN &rarr;</span>
                 </div>
-            </div>
-            <div class="category-card">
-                <img src="<?= getImageUrl('assets/images/categories/new-arrivals/new-arrivals-collection.jpg', 'NEW ARRIVALS') ?>" alt="New Arrivals" class="category-card-img">
-                <div class="category-card-content">
-                    <h3 class="category-card-title">NEW ARRIVALS</h3>
-                    <a href="shop.php?new=1" class="category-card-link">DISCOVER DROPS &rarr;</a>
+            </a>
+
+            <a href="shop.php?gender=Women" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">WOMEN</h2>
+                    <p class="collection-card-desc">Contemporary minimalist silhouettes, relaxed proportions, heavyweight layers, and elevated daily staples.</p>
                 </div>
-            </div>
-            <div class="category-card">
-                <img src="<?= getImageUrl('assets/images/categories/sale/sale-collection.jpg', 'SALE') ?>" alt="Sale Items" class="category-card-img">
-                <div class="category-card-content">
-                    <h3 class="category-card-title" style="color: var(--sale-color);">SEASON SALE</h3>
-                    <a href="shop.php?sale=1" class="category-card-link">SHOP UP TO 40% OFF &rarr;</a>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE WOMEN &rarr;</span>
                 </div>
-            </div>
+            </a>
+
+            <a href="shop.php?cat=tshirts" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">T-SHIRTS</h2>
+                    <p class="collection-card-desc">280GSM organic high-density cotton tees with reinforced ribbed collars engineered to maintain structure.</p>
+                </div>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE T-SHIRTS &rarr;</span>
+                </div>
+            </a>
+
+            <a href="shop.php?cat=hoodies" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">HOODIES &amp; SWEATS</h2>
+                    <p class="collection-card-desc">450GSM plush heavyweight fleece, double-lined seamless hoods, and relaxed dropped-shoulder drape.</p>
+                </div>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE HOODIES &rarr;</span>
+                </div>
+            </a>
+
+            <a href="shop.php?cat=pants" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">PANTS &amp; CARGOS</h2>
+                    <p class="collection-card-desc">Tailored utility cargo pants, wide-leg pleated trousers, and heavyweight French terry sweatpants.</p>
+                </div>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE PANTS &rarr;</span>
+                </div>
+            </a>
+
+            <a href="shop.php?cat=jackets" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">JACKETS &amp; OUTERWEAR</h2>
+                    <p class="collection-card-desc">Structural outerwear, minimal bomber jackets, oversized puffers, and architectural transitional coats.</p>
+                </div>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE JACKETS &rarr;</span>
+                </div>
+            </a>
+
+            <a href="shop.php?cat=shirts" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">SHIRTS</h2>
+                    <p class="collection-card-desc">Clean tailored button-down shirts and textured linen overshirts built with modern relaxed fits.</p>
+                </div>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE SHIRTS &rarr;</span>
+                </div>
+            </a>
+
+            <a href="shop.php?cat=accessories" class="collection-card-item">
+                <div class="collection-card-top">
+                    <h2 class="collection-card-heading">ACCESSORIES</h2>
+                    <p class="collection-card-desc">Signature heavyweight caps, structured canvas totes, socks, and minimalist everyday essentials.</p>
+                </div>
+                <div class="collection-card-bottom">
+                    <span class="collection-card-link-text">EXPLORE ACCESSORIES &rarr;</span>
+                </div>
+            </a>
         </div>
     </div>
 </section>
