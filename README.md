@@ -200,7 +200,3 @@ The database `kandy_co` contains the following relational tables:
 * **Responsive Architecture**: Fluid viewport scaling supporting Mobile (320px+), Tablet, and Desktop displays.
 
 ---
-
-## 📄 License
-
-This project is created for **KANDY CO.** All rights reserved.
