@@ -49,10 +49,9 @@
 
 ## 🛠 Technology Stack
 
-* **Backend**: PHP 8.x (Modular, Object-Oriented with PDO)
+* **Backend**: PHP 
 * **Database**: MySQL / MariaDB (`kandy_co`)
-* **Frontend**: HTML5, Vanilla CSS3 (Custom Design System with CSS Tokens), JavaScript (ES6+)
-* **Typography**: Plus Jakarta Sans & Inter (Google Fonts)
+* **Frontend**: HTML5, Vanilla CSS , JavaScript
 * **Server Environment**: Apache (XAMPP / WAMP / LEMP / LAMP)
 
 ---
