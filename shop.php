@@ -15,7 +15,6 @@ $gender = trim($_GET['gender'] ?? '');
 $isSale = isset($_GET['sale']) && $_GET['sale'] == '1';
 $isNew = isset($_GET['new']) && $_GET['new'] == '1';
 $size = trim($_GET['size'] ?? '');
-$color = trim($_GET['color'] ?? '');
 $minPrice = isset($_GET['min_price']) && is_numeric($_GET['min_price']) ? (float)$_GET['min_price'] : 0;
 $maxPrice = isset($_GET['max_price']) && is_numeric($_GET['max_price']) ? (float)$_GET['max_price'] : 1000;
 $sort = trim($_GET['sort'] ?? 'newest');
@@ -68,11 +67,6 @@ if ($isNew) {
 if ($size !== '') {
     $sql .= " AND pv.size = ?";
     $params[] = $size;
-}
-
-if ($color !== '') {
-    $sql .= " AND pv.color = ?";
-    $params[] = $color;
 }
 
 if ($minPrice > 0 || $maxPrice < 1000) {
@@ -180,18 +174,6 @@ if ($catSlug) {
                     <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                         <?php foreach (['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $sz): ?>
                             <a href="shop.php?size=<?= $sz ?>" class="size-btn <?= $size === $sz ? 'active' : '' ?>" style="min-width: 38px; height: 38px; font-size: 0.75rem;"><?= $sz ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-
-                <!-- Color -->
-                <div class="filter-group" style="margin-bottom: 28px;">
-                    <h4 style="font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">COLOR</h4>
-                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem;">
-                        <?php foreach (['Black', 'White', 'Cream', 'Brown', 'Grey'] as $col): ?>
-                            <a href="shop.php?color=<?= urlencode($col) ?>" style="<?= $color === $col ? 'font-weight: 700; text-decoration: underline;' : '' ?>">
-                                &bull; <?= $col ?>
-                            </a>
                         <?php endforeach; ?>
                     </div>
                 </div>

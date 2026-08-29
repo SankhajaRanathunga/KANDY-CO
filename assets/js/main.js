@@ -83,26 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* 4. Variant Selection (Color & Size) */
-    const colorBtns = document.querySelectorAll('.color-btn');
+    /* 4. Variant Selection (Size-Based) */
     const sizeBtns = document.querySelectorAll('.size-btn');
-    const selectedColorInput = document.getElementById('selectedColor');
     const selectedSizeInput = document.getElementById('selectedSize');
     const selectedVariantIdInput = document.getElementById('selectedVariantId');
     const stockStatusElem = document.getElementById('stockStatusElem');
-
-    if (colorBtns.length > 0) {
-        colorBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                colorBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                if (selectedColorInput) {
-                    selectedColorInput.value = this.getAttribute('data-color');
-                }
-                updateVariantMatch();
-            });
-        });
-    }
 
     if (sizeBtns.length > 0) {
         sizeBtns.forEach(btn => {
@@ -119,13 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateVariantMatch() {
-        if (!selectedColorInput || !selectedSizeInput) return;
-        const color = selectedColorInput.value;
+        if (!selectedSizeInput) return;
         const size = selectedSizeInput.value;
 
         // Check window.productVariants dataset if injected by PHP
         if (window.productVariants && Array.isArray(window.productVariants)) {
-            const matched = window.productVariants.find(v => v.color.toLowerCase() === color.toLowerCase() && v.size.toLowerCase() === size.toLowerCase());
+            const matched = window.productVariants.find(v => v.size.toLowerCase() === size.toLowerCase());
             if (matched) {
                 if (selectedVariantIdInput) selectedVariantIdInput.value = matched.id;
                 if (stockStatusElem) {
@@ -137,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 if (stockStatusElem) {
-                    stockStatusElem.innerHTML = `<span class="stock-indicator low"></span> VARIANT UNAVAILABLE`;
+                    stockStatusElem.innerHTML = `<span class="stock-indicator low"></span> SIZE UNAVAILABLE`;
                 }
             }
         }

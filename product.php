@@ -44,23 +44,20 @@ try {
 // Fetch Variants
 $variants = [];
 try {
-    $stmt = $pdo->prepare("SELECT * FROM product_variants WHERE product_id = ? ORDER BY size ASC, color ASC");
+    $stmt = $pdo->prepare("SELECT * FROM product_variants WHERE product_id = ? ORDER BY size ASC");
     $stmt->execute([$productId]);
     $variants = $stmt->fetchAll();
 } catch (Exception $e) {}
 
-$colors = [];
 $sizes = [];
 foreach ($variants as $v) {
-    if (!in_array($v['color'], $colors)) $colors[] = $v['color'];
     if (!in_array($v['size'], $sizes)) $sizes[] = $v['size'];
 }
-$defaultColor = $colors[0] ?? 'Black';
 $defaultSize = $sizes[0] ?? 'M';
 
 $defaultVariant = null;
 foreach ($variants as $v) {
-    if (strtolower($v['color']) === strtolower($defaultColor) && strtolower($v['size']) === strtolower($defaultSize)) {
+    if (strtolower($v['size']) === strtolower($defaultSize)) {
         $defaultVariant = $v;
         break;
     }
@@ -144,24 +141,8 @@ $variantsJson = json_encode($variants);
 
                 <form action="cart.php?action=add" method="POST">
                     <input type="hidden" name="product_id" value="<?= $productId ?>">
-                    <input type="hidden" name="color" id="selectedColor" value="<?= e($defaultColor) ?>">
                     <input type="hidden" name="size" id="selectedSize" value="<?= e($defaultSize) ?>">
                     <input type="hidden" name="variant_id" id="selectedVariantId" value="<?= $defaultVariant ? $defaultVariant['id'] : 0 ?>">
-
-                    <?php if (!empty($colors)): ?>
-                        <div class="variant-option-group">
-                            <div class="variant-header">
-                                <span class="form-label">COLOR:</span>
-                            </div>
-                            <div class="color-options">
-                                <?php foreach ($colors as $c): ?>
-                                    <button type="button" class="color-btn <?= strtolower($c) === strtolower($defaultColor) ? 'active' : '' ?>" data-color="<?= e($c) ?>">
-                                        <?= e($c) ?>
-                                    </button>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
 
                     <div class="variant-option-group">
                         <div class="variant-header">
@@ -171,6 +152,9 @@ $variantsJson = json_encode($variants);
                         <div class="size-options">
                             <?php 
                             $allSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+                            if (in_array('One Size', $sizes)) {
+                                $allSizes = ['One Size'];
+                            }
                             foreach ($allSizes as $s): 
                                 $isAvailable = in_array($s, $sizes);
                             ?>
